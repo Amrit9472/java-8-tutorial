@@ -1,0 +1,19 @@
+package coding.consumer;
+
+import java.util.function.Consumer;
+
+public class ConsumerExample {
+
+	public static void main(String[] args) {
+
+		Consumer<String> con1 = (s) -> {System.out.println(s.toUpperCase());};
+		con1.accept(" Amrit Raj Singh java 8 ");
+		
+		Consumer<String> con2 = (s) -> System.out.println(s.toLowerCase());
+		con2.accept(" Amrit Raj Singh java 8 ");
+		
+		System.out.println("-------------------");
+		con2.andThen(con1).accept(" Amrit Raj Singh");
+	}
+
+}
