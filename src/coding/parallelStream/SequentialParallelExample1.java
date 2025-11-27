@@ -1,0 +1,29 @@
+package coding.parallelStream;
+
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
+
+public class SequentialParallelExample1 {
+
+	public static void main(String[] args) {
+		//System.out.println("Sum from seq :" +sumMethodUsingSeq());
+		//System.out.println("Sum from Parallel :" +sumMethodUsingParallel());
+	    System.out.println("Sum from seq :"+checkPerformance(SequentialParallelExample1 :: sumMethodUsingSeq,25));
+	    System.out.println("Sum from Parallel :" +checkPerformance(SequentialParallelExample1 :: sumMethodUsingParallel,25));
+	}
+	static long checkPerformance(Supplier<Integer> sum , int numberOfTimes) {
+		long start = System.currentTimeMillis();
+		for(int i = 0; i <= numberOfTimes; i++) {
+			sum.get();
+		}
+		long end = System.currentTimeMillis();
+		return end - start;
+	}
+	static int sumMethodUsingSeq() {
+		return IntStream.range(0, 1000000).sum();
+	}
+
+	static int sumMethodUsingParallel() {
+		return IntStream.range(0, 1000000).parallel().sum();
+	}
+}
